@@ -115,4 +115,4 @@ This project has a solid foundation with many possibilities for future developme
 ## 📧 Contact
 Your Name – [your.email@example.com](mailto:akash220701@gmail.com)
 
-Project Link: [https://github.com/your-username/culinarycompass](https://github.com/your-username/culinarycompass)
+Project Link: [https://github.com/your-username/culinarycompass](https://github.com/akashkumarsky/culinarycompass)
