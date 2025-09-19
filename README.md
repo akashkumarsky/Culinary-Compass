@@ -1,118 +1,125 @@
-# Culinary Compass 🧭
+Culinary Compass 🧭
+A full-stack web application designed to simplify meal planning and recipe discovery. Built with a Spring Boot backend and a React.js frontend, Culinary Compass allows users to search for recipes, save their favorites, plan their weekly meals on an interactive calendar, and automatically generate a shopping list.
 
-A full-stack web application designed to simplify meal planning and recipe discovery. Built with a Spring Boot backend and a React.js frontend, Culinary Compass allows users to search for recipes, plan their weekly meals on an interactive calendar, and automatically generate a shopping list.
+Live Demo: culinary-compass-recipe.netlify.app
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+✨ Features
+Secure User Authentication: Full JWT-based registration and login system with password hashing.
 
-### Live Demo (Placeholder)
-**[Link to Deployed Application]**
+Dynamic Recipe Search: Search thousands of recipes via the Spoonacular API with a premium, user-friendly interface.
 
----
+Personal Recipe Collection: Users can save their favorite recipes to a personal collection and view or remove them at any time.
 
+Interactive Meal Planner: A weekly calendar view where users can add/remove recipes to specific meal slots (Breakfast, Lunch, Dinner).
 
+Automatic Shopping List: Generate a consolidated shopping list for the week based on planned meals, aggregating ingredient quantities.
 
-## ✨ Features
+Detailed Recipe View: Click on any recipe to see a full page with its summary, ingredients, and instructions.
 
-* **Secure User Authentication**: JWT-based registration and login system.
-* **Dynamic Recipe Search**: Search thousands of recipes via the Spoonacular API with a modern, user-friendly interface.
-* **Personal Recipe Collection**: Users can save their favorite recipes to a personal collection and view them anytime.
-* **Interactive Meal Planner**: A weekly calendar view where users can add recipes to specific meal slots (Breakfast, Lunch, Dinner).
-* **Automatic Shopping List**: Generate a consolidated shopping list for the week based on the planned meals, aggregating ingredient quantities.
-* **Detailed Recipe View**: Click on any recipe to see a full page with its summary, ingredients, and instructions.
-* **Premium & Responsive UI**: A polished interface built with Tailwind CSS, featuring skeleton loaders, hover animations, and a fully responsive design for all screen sizes.
-* **Public Homepage**: An engaging landing page for new visitors explaining the project's features.
+Premium & Responsive UI: A polished interface built with Tailwind CSS, featuring skeleton loaders, hover animations, and a fully responsive design for all screen sizes.
 
-## 🛠️ Tech Stack
+Professional Landing Page: An engaging public homepage for new visitors explaining the project's features.
 
-### Backend
-* **Java 17** & **Spring Boot 3**
-* **Spring Security** (JWT for token-based authentication)
-* **Spring Data JPA** (Hibernate)
-* **PostgreSQL**
-* **Maven**
+🛠️ Tech Stack
+Backend
+Java 17 & Spring Boot 3
 
-### Frontend
-* **React.js** (Vite)
-* **Tailwind CSS** for styling
-* **React Router** for page navigation
-* **React Context API** for global state management
-* **Axios** for API communication
-* **date-fns** for date manipulation
+Spring Security (JWT for token-based authentication)
 
----
+Spring Data JPA (Hibernate)
 
-## 🚀 Getting Started
+PostgreSQL (Hosted on Neon)
 
+Maven
+
+Docker for containerization
+
+Frontend
+React.js (Vite)
+
+Tailwind CSS for styling
+
+React Router for page navigation
+
+React Context API for global state management (Authentication)
+
+Axios for API communication
+
+date-fns for date manipulation
+
+Deployment
+Backend: Deployed as a Docker container on Render.
+
+Database: Serverless PostgreSQL hosted on Neon.
+
+Frontend: Deployed on Netlify.
+
+🚀 Getting Started
 To get a local copy up and running, follow these simple steps.
 
-### Prerequisites
-
+Prerequisites
 Make sure you have the following installed on your machine:
-* Java JDK 17 or later
-* Maven
-* Node.js and npm
-* PostgreSQL
 
-### Backend Setup
+Java JDK 17 or later
 
-1.  **Clone the repository**
-    ```sh
-    git clone [https://github.com/your-username/culinarycompass.git](https://github.com/your-username/culinarycompass.git)
-    cd culinarycompass/backend
-    ```
-2.  **Configure the database**
-    Open `src/main/resources/application.properties` and update the following properties with your PostgreSQL credentials:
-    ```properties
-    spring.datasource.url=jdbc:postgresql://localhost:5432/your_db_name
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
-    ```
-3.  **Run the application**
-    ```sh
-    mvn spring-boot:run
-    ```
-    The backend server will start on `http://localhost:8088`.
+Maven
 
-### Frontend Setup
+Node.js and npm
 
-1.  **Navigate to the frontend directory**
-    ```sh
-    cd ../frontend 
-    ```
-2.  **Install NPM packages**
-    ```sh
-    npm install
-    ```
-3.  **Add your API Key**
-    Create a file named `.env.local` in the `frontend` root directory and add your Spoonacular API key:
-    ```
-    VITE_SPOONACULAR_API_KEY=your_spoonacular_api_key_here
-    ```
-4.  **Run the development server**
-    ```sh
-    npm run dev
-    ```
-    The frontend will be available at `http://localhost:5173`.
+PostgreSQL
 
----
+Backend Setup
+Clone the repository
 
-## 🌟 Future Enhancements
+git clone [https://github.com/akashkumarsky/Culinary-Compass.git](https://github.com/akashkumarsky/Culinary-Compass.git)
+cd Culinary-Compass/backend
 
+Configure the database
+Open src/main/resources/application.properties. The file is already configured to use your local PostgreSQL database with default credentials (postgres/root). Create a database named culinarycompass or update the credentials to match your local setup.
+
+Run the application
+
+mvn spring-boot:run
+
+The backend server will start on http://localhost:8088.
+
+Frontend Setup
+Navigate to the frontend directory
+
+cd ../frentend
+
+Install NPM packages
+
+npm install
+
+Add your API Key
+Create a file named .env.local in the frentend root directory and add your Spoonacular API key:
+
+VITE_SPOONACULAR_API_KEY=your_spoonacular_api_key_here
+
+Run the development server
+
+npm run dev
+
+The frontend will be available at http://localhost:5173.
+
+🌟 Future Enhancements
 This project has a solid foundation with many possibilities for future development:
-* **Nutritional Analysis**: Track daily macronutrient intake against user goals.
-* **Pantry Management**: Suggest recipes based on ingredients the user already has.
-* **AI-Powered Suggestions**: Use Spring AI to provide recipe ideas based on natural language prompts.
-* **Real-time Shopping List**: Use WebSockets to sync a shopping list between multiple users in real-time.
 
----
+Nutritional Analysis: Track daily macronutrient intake against user goals.
 
-## 🙏 Acknowledgements
-* Recipe data is provided by the [Spoonacular API](https://spoonacular.com/food-api).
+Pantry Management: Suggest recipes based on ingredients the user already has.
 
----
+AI-Powered Suggestions: Use Spring AI to provide recipe ideas based on natural language prompts.
 
-## 📧 Contact
-Your Name – [your.email@example.com](mailto:akash220701@gmail.com)
+Real-time Shopping List: Use WebSockets to sync a shopping list between multiple users in real-time.
 
-Project Link: [https://github.com/your-username/culinarycompass](https://github.com/akashkumarsky/culinarycompass)
+🙏 Acknowledgements
+Recipe data is provided by the Spoonacular API.
+
+Hosting provided by Render, Neon, and Netlify.
+
+📧 Contact
+Akash Kumar – akash220701@gmail.com
+
+Project Link: https://culinary-compass-recipe.netlify.app/
