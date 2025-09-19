@@ -29,7 +29,7 @@ function App() {
               <Route path="/" element={token ? <Navigate to="/dashboard" /> : <PublicHomePage />} />
 
               {/* Public auth routes */}
-              <Route path="/login" element={token ? <Navigate to="/dashboard" /> : <Login />} />
+              <Route path="/login" element={token ? <Navigate to="/dashboard" /> : <PublicHomePage />} />
               <Route path="/register" element={token ? <Navigate to="/dashboard" /> : <Register />} />
 
               {/* Protected Routes */}

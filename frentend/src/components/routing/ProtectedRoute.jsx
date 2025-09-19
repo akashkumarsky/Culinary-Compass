@@ -8,7 +8,7 @@ const ProtectedRoute = () => {
 
     if (!token) {
         // Redirect to the /login page
-        return <Navigate to="/dashboard" replace />;
+        return <Navigate to="/login" replace />;
     }
 
     return <Outlet />;
