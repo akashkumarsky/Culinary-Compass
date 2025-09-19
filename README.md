@@ -1,7 +1,7 @@
 Culinary Compass 🧭
 A full-stack web application designed to simplify meal planning and recipe discovery. Built with a Spring Boot backend and a React.js frontend, Culinary Compass allows users to search for recipes, save their favorites, plan their weekly meals on an interactive calendar, and automatically generate a shopping list.
 
-Live Demo: culinary-compass-recipe.netlify.app
+Live Demo: [culinary-compass-recipe.netlify.app](https://culinary-compass-recipe.netlify.app/)
 
 ✨ Features
 Secure User Authentication: Full JWT-based registration and login system with password hashing.
