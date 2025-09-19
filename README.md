@@ -86,7 +86,7 @@ The backend server will start on http://localhost:8088.
 Frontend Setup
 Navigate to the frontend directory
 
-cd ../frentend
+cd ../frentend 
 
 Install NPM packages
 
@@ -122,4 +122,4 @@ Hosting provided by Render, Neon, and Netlify.
 📧 Contact
 Akash Kumar – akash220701@gmail.com
 
-Project Link: https://culinary-compass-recipe.netlify.app/
+Project Link: https://github.com/akashkumarsky/Culinary-Compass
