@@ -15,8 +15,9 @@ const MyRecipesPage = () => {
     useEffect(() => {
         const fetchSavedRecipes = async () => {
             try {
-                // Axios automatically sends the auth token
-                const response = await axios.get('http://localhost:8088/api/recipes/saved');
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_BASE_URL}/api/recipes/saved`
+                );
                 setSavedRecipes(response.data);
             } catch (error) {
                 console.error('Failed to fetch saved recipes', error);
@@ -25,7 +26,7 @@ const MyRecipesPage = () => {
         };
 
         fetchSavedRecipes();
-    }, []); // Empty dependency array means this runs once on component mount
+    }, []);
 
     return (
         <div>
@@ -39,7 +40,7 @@ const MyRecipesPage = () => {
                             key={recipe.id}
                             recipe={recipe}
                             showSaveButton={false}
-                            onRemove={handleRemoveRecipe} // <-- Pass the handler function
+                            onRemove={handleRemoveRecipe}
                         />
                     ))}
                 </div>

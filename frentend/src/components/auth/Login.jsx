@@ -16,12 +16,19 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(
-                "http://localhost:8088/api/users/login",
-                formData
-            );
+            // --- THIS IS THE FIX ---
+            // 1. Define the API_URL constant first.
+            const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8088';
+            
+            // 2. Make the API call and assign its result to 'response'.
+            const response = await axios.post(`${API_URL}/api/users/login`, formData);
+
+            // 3. Use the token from the response to log in.
             login(response.data.token);
-            alert("Login successful!");
+            
+            // Note: The alert can be removed if you have automatic redirection in your App.jsx
+            // alert("Login successful!"); 
+
         } catch (error) {
             console.error("Login failed:", error);
             setError("Invalid username or password. Please try again.");
@@ -31,7 +38,6 @@ const Login = () => {
     return (
         <div className="h-screen flex items-center justify-center bg-gradient-to-br from-green-700 via-teal-800 to-blue-900 p-6">
             <div className="w-full max-w-md bg-gray-900/30 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-800 animate-fadeIn">
-                {/* Title */}
                 <h2 className="text-3xl font-extrabold text-center text-white drop-shadow mb-2">
                     Welcome Back 👋
                 </h2>
@@ -39,20 +45,15 @@ const Login = () => {
                     Sign in to continue your culinary journey
                 </p>
 
-                {/* Error Message */}
                 {error && (
                     <div className="mb-4 text-center text-red-400 text-sm font-medium">
                         {error}
                     </div>
                 )}
 
-                {/* Login Form */}
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label
-                            className="block text-sm font-semibold text-white mb-2"
-                            htmlFor="username"
-                        >
+                        <label className="block text-sm font-semibold text-white mb-2" htmlFor="username">
                             Username
                         </label>
                         <input
@@ -66,10 +67,7 @@ const Login = () => {
                         />
                     </div>
                     <div>
-                        <label
-                            className="block text-sm font-semibold text-white mb-2"
-                            htmlFor="password"
-                        >
+                        <label className="block text-sm font-semibold text-white mb-2" htmlFor="password">
                             Password
                         </label>
                         <input
@@ -82,7 +80,6 @@ const Login = () => {
                             required
                         />
                     </div>
-
                     <button
                         type="submit"
                         className="w-full py-3 px-6 rounded-xl font-bold text-white bg-gradient-to-r from-green-700 via-teal-700 to-blue-800 hover:scale-105 transform transition-all shadow-lg"
@@ -91,13 +88,9 @@ const Login = () => {
                     </button>
                 </form>
 
-                {/* Footer Links */}
                 <p className="text-center text-sm text-gray-300 mt-6">
                     Don’t have an account?{" "}
-                    <Link
-                        to="/register"
-                        className="font-bold text-green-300 hover:text-green-400 transition"
-                    >
+                    <Link to="/register" className="font-bold text-green-300 hover:text-green-400 transition">
                         Register
                     </Link>
                 </p>

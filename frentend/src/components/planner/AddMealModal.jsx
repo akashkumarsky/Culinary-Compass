@@ -4,11 +4,13 @@ import axios from 'axios';
 const AddMealModal = ({ date, mealType, onClose, onMealAdded }) => {
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8088';
+
 
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await axios.get('http://localhost:8088/api/recipes/saved');
+                const response = await axios.get(`${API_URL}/api/recipes/saved`);
                 setSavedRecipes(response.data);
             } catch (error) {
                 console.error("Failed to fetch saved recipes", error);
@@ -16,7 +18,7 @@ const AddMealModal = ({ date, mealType, onClose, onMealAdded }) => {
             setLoading(false);
         };
         fetchRecipes();
-    }, []);
+    }, [API_URL]);
 
     const handleSelectRecipe = async (recipeId) => {
         try {
@@ -25,7 +27,7 @@ const AddMealModal = ({ date, mealType, onClose, onMealAdded }) => {
                 mealDate: date,
                 mealType: mealType,
             };
-            const response = await axios.post('http://localhost:8088/api/meal-plan/add', payload);
+            const response = await axios.post(`${API_URL}/api/meal-plan/add`, payload);
             onMealAdded(response.data);
             onClose();
         } catch (error) {

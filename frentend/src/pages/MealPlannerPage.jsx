@@ -12,9 +12,12 @@ const MealPlannerPage = () => {
     const [modalData, setModalData] = useState({ date: null, mealType: null });
     const [showShoppingList, setShowShoppingList] = useState(false);
 
+    // ✅ Load API base URL from .env
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     const fetchMealPlan = async () => {
         try {
-            const response = await axios.get('http://localhost:8088/api/meal-plan');
+            const response = await axios.get(`${API_BASE_URL}/api/meal-plan`);
             setMealPlan(response.data);
         } catch (error) {
             console.error('Failed to fetch meal plan', error);
@@ -42,7 +45,7 @@ const MealPlannerPage = () => {
     const handleRemoveMeal = async (plannedMealId) => {
         if (!window.confirm("Are you sure you want to remove this meal?")) return;
         try {
-            await axios.delete(`http://localhost:8088/api/meal-plan/remove/${plannedMealId}`);
+            await axios.delete(`${API_BASE_URL}/api/meal-plan/remove/${plannedMealId}`);
             setMealPlan(prevPlan => ({
                 ...prevPlan,
                 plannedMeals: prevPlan.plannedMeals.filter(meal => meal.id !== plannedMealId)
@@ -66,8 +69,8 @@ const MealPlannerPage = () => {
             <h1 className="text-4xl md:text-5xl font-extrabold text-center text-white mb-8 drop-shadow-lg">Weekly Meal Planner</h1>
 
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                <button 
-                    onClick={() => setCurrentWeekStart(subDays(currentWeekStart, 7))} 
+                <button
+                    onClick={() => setCurrentWeekStart(subDays(currentWeekStart, 7))}
                     className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all"
                 >
                     &larr; Previous
@@ -77,8 +80,8 @@ const MealPlannerPage = () => {
                     {format(currentWeekStart, 'MMM d')} - {format(addDays(currentWeekStart, 6), 'MMM d, yyyy')}
                 </h2>
 
-                <button 
-                    onClick={() => setCurrentWeekStart(addDays(currentWeekStart, 7))} 
+                <button
+                    onClick={() => setCurrentWeekStart(addDays(currentWeekStart, 7))}
                     className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all"
                 >
                     Next &rarr;
@@ -86,8 +89,8 @@ const MealPlannerPage = () => {
             </div>
 
             <div className="text-center mb-6">
-                <button 
-                    onClick={() => setShowShoppingList(!showShoppingList)} 
+                <button
+                    onClick={() => setShowShoppingList(!showShoppingList)}
                     className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all"
                 >
                     {showShoppingList ? 'Hide' : 'Generate'} Shopping List
@@ -107,8 +110,8 @@ const MealPlannerPage = () => {
                                         <h4 className="text-xs font-bold text-gray-500 uppercase">{type}</h4>
                                         {meal ? (
                                             <div className="text-xs relative">
-                                                <button 
-                                                    onClick={() => handleRemoveMeal(meal.id)} 
+                                                <button
+                                                    onClick={() => handleRemoveMeal(meal.id)}
                                                     className="absolute -top-1 -right-1 bg-red-600 hover:bg-red-700 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
                                                     title="Remove meal"
                                                 >
@@ -118,8 +121,8 @@ const MealPlannerPage = () => {
                                                 <p className="truncate mt-1 text-gray-200 font-semibold">{meal.recipe.title}</p>
                                             </div>
                                         ) : (
-                                            <button 
-                                                onClick={() => handleOpenModal(day, type)} 
+                                            <button
+                                                onClick={() => handleOpenModal(day, type)}
                                                 className="text-xs text-green-400 hover:text-green-500 w-full text-center p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition"
                                             >
                                                 + Add Meal

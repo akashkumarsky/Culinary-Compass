@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const RecipeCard = ({ recipe, showSaveButton = true, onRemove }) => {
+    // Define the base URL using the environment variable for production, with a fallback for local development.
+    const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8088';
+
     const handleSave = async () => {
         try {
             const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
@@ -17,22 +20,24 @@ const RecipeCard = ({ recipe, showSaveButton = true, onRemove }) => {
                 summary: detailsResponse.data.summary,
             };
 
-            await axios.post('http://localhost:8088/api/recipes/save', recipeData);
+            // Use the API_URL variable for the backend endpoint.
+            await axios.post(`${API_URL}/api/recipes/save`, recipeData);
             alert('Recipe saved!');
         } catch (error) {
             alert('Failed to save recipe.');
-            console.error('Error saving recipe', error);
+            console.error('Error saving recipe:', error.response?.data || error.message);
         }
     };
 
     const handleRemove = async () => {
         try {
-            await axios.delete(`http://localhost:8088/api/recipes/remove/${recipe.id}`);
+            // Use the API_URL variable for the backend endpoint.
+            await axios.delete(`${API_URL}/api/recipes/remove/${recipe.id}`);
             alert('Recipe removed!');
             if (onRemove) onRemove(recipe.id);
         } catch (error) {
             alert('Failed to remove recipe.');
-            console.error('Error removing recipe', error);
+            console.error('Error removing recipe:', error.response?.data || error.message);
         }
     };
 

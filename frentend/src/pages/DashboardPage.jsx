@@ -6,10 +6,14 @@ const DashboardPage = () => {
     const [welcomeMessage, setWelcomeMessage] = useState("");
     const [loading, setLoading] = useState(true);
 
+    // ✅ Load API base URL from .env
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         const fetchWelcomeMessage = async () => {
             try {
-                await axios.get("http://localhost:8088/api/dashboard/welcome");
+                // ✅ Use env variable instead of hardcoded localhost
+                await axios.get(`${API_BASE_URL}/api/dashboard/welcome`);
 
                 const messages = [
                     "Your culinary journey starts here. Let’s turn ingredients into memories.",
@@ -33,7 +37,7 @@ const DashboardPage = () => {
             }
         };
         fetchWelcomeMessage();
-    }, []);
+    }, [API_BASE_URL]);
 
     const getTimeGreeting = () => {
         const hour = new Date().getHours();
