@@ -26,7 +26,7 @@ const AddMealModal = ({ date, mealType, onClose, onMealAdded }) => {
                 mealType: mealType,
             };
             const response = await axios.post('http://localhost:8088/api/meal-plan/add', payload);
-            onMealAdded(response.data); // Send new meal data back to parent
+            onMealAdded(response.data);
             onClose();
         } catch (error) {
             console.error("Failed to add meal", error);
@@ -35,22 +35,35 @@ const AddMealModal = ({ date, mealType, onClose, onMealAdded }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg max-w-lg w-full">
-                <h2 className="text-2xl font-bold mb-4">Add a Recipe to {mealType}</h2>
-                {loading ? <p>Loading saved recipes...</p> : (
-                    <ul className="space-y-2 max-h-80 overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="bg-gray-900/90 text-white p-6 rounded-2xl max-w-lg w-full shadow-2xl border border-green-700">
+                <h2 className="text-2xl font-bold mb-4 text-green-300 drop-shadow-lg">
+                    Add a Recipe to {mealType}
+                </h2>
+                {loading ? (
+                    <p className="text-gray-400">Loading saved recipes...</p>
+                ) : (
+                    <ul className="space-y-3 max-h-80 overflow-y-auto">
                         {savedRecipes.map(recipe => (
-                            <li key={recipe.id}
+                            <li
+                                key={recipe.id}
                                 onClick={() => handleSelectRecipe(recipe.id)}
-                                className="flex items-center p-2 rounded-md hover:bg-gray-200 cursor-pointer">
-                                <img src={recipe.image} alt={recipe.title} className="w-16 h-16 object-cover rounded mr-4" />
-                                <span>{recipe.title}</span>
+                                className="flex items-center p-2 rounded-lg hover:bg-green-700 hover:bg-opacity-30 cursor-pointer transition-all duration-200"
+                            >
+                                <img
+                                    src={recipe.image}
+                                    alt={recipe.title}
+                                    className="w-16 h-16 object-cover rounded-lg mr-4 border border-green-600"
+                                />
+                                <span className="font-semibold">{recipe.title}</span>
                             </li>
                         ))}
                     </ul>
                 )}
-                <button onClick={onClose} className="mt-4 bg-red-500 text-white py-2 px-4 rounded w-full">
+                <button
+                    onClick={onClose}
+                    className="mt-4 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg w-full font-bold transition-all duration-200"
+                >
                     Cancel
                 </button>
             </div>

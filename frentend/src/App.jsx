@@ -20,7 +20,7 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-gray-100 min-h-screen">
+      <div className=" min-h-screen">
         <Navbar />
         <main className="flex-grow">
           <div className="container mx-auto py-8 px-4"> {/* Added horizontal padding */}

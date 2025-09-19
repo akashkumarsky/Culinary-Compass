@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+
+
+/* App.css or index.css */
+
+/* Make sure root containers fill the viewport */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: radial-gradient(800px 360px at 10% 10%, rgba(214, 197, 244, 0.06), transparent 8%),
+              radial-gradient(700px 300px at 90% 90%, rgba(6,182,212,0.04), transparent 6%),
+              linear-gradient(135deg, #0f172a 0%, #0b1220 40%, #0b0f1a 100%);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #e6eef8;
+}
+
+/* Optional: smooth animations for fade-in elements */
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Optional: default link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+@keyframes blob {
+  0%, 100% { transform: translate(0px,0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.animate-blob {
+  animation: blob 8s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+

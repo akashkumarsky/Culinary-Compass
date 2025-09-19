@@ -1,96 +1,83 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // <-- 1. Import useNavigate
 
 const Register = () => {
-    // State to hold the form data
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
     });
+    const [error, setError] = useState("");
+    const navigate = useNavigate(); // <-- 2. Initialize the hook
 
-    // Function to update state when user types in an input field
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        setError("");
     };
 
-    // Function to handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
         try {
-            // Make a POST request to the backend registration endpoint
-            const response = await axios.post('http://localhost:8088/api/users/register', formData);
+            const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8088';
+            const response = await axios.post(
+                `${API_URL}/api/users/register`,
+                formData
+            );
             console.log('User registered successfully:', response.data);
-            alert('Registration successful!');
-            // You can add logic here to redirect the user or clear the form
-        } catch (error) {
-            console.error('There was an error registering the user:', error.response.data);
-            alert(`Error: ${error.response.data}`);
+
+            // 3. Redirect to the login page on success
+            navigate('/login');
+
+        } catch (err) {
+            console.error('Error registering user:', err.response?.data);
+            setError(err.response?.data || 'Something went wrong!');
         }
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-8 border rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                        Username
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="username"
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                        Email
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="email"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-6">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                        Password
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                        id="password"
-                        type="password"
-                        name="password"
-                        placeholder="******************"
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="flex items-center justify-between">
-                    <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="submit"
-                    >
+        // --- Your beautiful JSX remains exactly the same ---
+        <div className="h-screen flex items-center justify-center bg-gradient-to-br from-green-700 via-teal-800 to-blue-900 p-6">
+            <div className="w-full max-w-md bg-gray-900/30 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-800 animate-fadeIn">
+                <h2 className="text-3xl font-extrabold text-center text-white drop-shadow mb-4">
+                    Create Account ✨
+                </h2>
+                <p className="text-center text-gray-300 text-sm mb-6">
+                    Join now and start your culinary journey
+                </p>
+
+                {error && (
+                    <div className="mb-4 text-center text-red-400 text-sm font-medium">
+                        {error}
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* ... Your form inputs ... */}
+                    <div>
+                        <label className="block text-sm font-semibold text-white mb-2" htmlFor="username">Username</label>
+                        <input className="w-full px-4 py-3 rounded-xl bg-gray-800/40 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition" id="username" type="text" name="username" placeholder="Enter your username" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-semibold text-white mb-2" htmlFor="email">Email</label>
+                        <input className="w-full px-4 py-3 rounded-xl bg-gray-800/40 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition" id="email" type="email" name="email" placeholder="Enter your email" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-semibold text-white mb-2" htmlFor="password">Password</label>
+                        <input className="w-full px-4 py-3 rounded-xl bg-gray-800/40 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition" id="password" type="password" name="password" placeholder="••••••••" onChange={handleChange} required />
+                    </div>
+                    <button type="submit" className="w-full py-3 px-6 rounded-xl font-bold text-white bg-gradient-to-r from-green-700 via-teal-700 to-blue-800 hover:scale-105 transform transition-all shadow-lg">
                         Register
                     </button>
-                </div>
-            </form>
-             <p className="text-center text-gray-500 text-sm mt-6">
-                Already have an account?{' '}
-                <Link to="/login" className="font-bold text-blue-500 hover:text-blue-800">
-                    Login
-                </Link>
-            </p>
+                </form>
+
+                <p className="text-center text-sm text-gray-300 mt-6">
+                    Already have an account?{' '}
+                    <Link to="/login" className="font-bold text-green-300 hover:text-green-400 transition">
+                        Login
+                    </Link>
+                </p>
+            </div>
         </div>
     );
 };
